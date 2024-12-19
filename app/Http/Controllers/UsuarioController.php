@@ -33,8 +33,8 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
        $usuario= new Usuarios();
-       $usuario->email=$request->email;
-       $usuario->contra=$request->contra;
+       $usuario->nomusuario=$request->email;
+       $usuario->passusuario=$request->contra;
        $usuario->save();
        return response()->json($usuario,200);
     }
@@ -62,8 +62,8 @@ class UsuarioController extends Controller
     {
         try{
             $usuario=Usuarios::findOrFail($id);
-            $usuario->email=$request->email;
-            $usuario->contra=$request->contra;
+            $usuario->nomusuario=$request->email;
+            $usuario->passusuario=$request->contra;
         }catch(ModelNotFoundException $ex){
             return response()->json($ex,500);
         }
@@ -87,8 +87,8 @@ class UsuarioController extends Controller
 
     public function login(Request $request){
         $usuario= Usuarios::all('*')
-        ->where('name','like',"$request->name")
-        ->where('password','like',"$request->password")->first();
+        ->where('nomusuario','like',"$request->name")
+        ->where('passusuario','like',"$request->password")->first();
         // return response()->json(count($usuario));
         if($usuario){
             return response()->json($usuario,200);
