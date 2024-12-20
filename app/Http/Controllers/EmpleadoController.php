@@ -32,7 +32,7 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         $empleado= new Empleados();
-        // $empleado->Desdepartamento=$request->Desdepartamento;
+        $empleado->Codempleado=$request->Codempleado;
         $empleado->Nomempleado=$request->Nomempleado;
         $empleado->Apeempleado=$request->Apeempleado;
         $empleado->CodDepartamento=$request->CodDepartamento;

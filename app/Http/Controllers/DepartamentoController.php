@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Departamentos;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DepartamentoController extends Controller
 {
@@ -31,7 +32,22 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
+        $rules=
+        [
+            "CodDepartamento"=>['required',"max:2"],
+            "Desdepartamento"=>["required"]
+        ];
+        $messages=
+        [
+            "CodDepartamento.required"=>"El codigo debe ser obligatorio",
+            "CodDepartamento.max"=>"El codigo debe tener 2 caracteres",
+
+        ];
+
+        request()->validate($rules,$messages);
+
         $departamento= new Departamentos();
+        $departamento->CodDepartamento=$request->CodDepartamento;
         $departamento->Desdepartamento=$request->Desdepartamento;
         $departamento->save();
 
@@ -78,5 +94,14 @@ class DepartamentoController extends Controller
         $departamento= Departamentos::findOrFail($id);
         $departamento->delete();
        return 204;
+    }
+
+    public function graficar(){
+        $grafico= DB::select("select d.Desdepartamento as Departamento, count(e.Codempleado) as Cantidad from departamentos as d
+left join empleados as e
+on d.CodDepartamento =e.CodDepartamento
+group by 1");
+
+return response()->json($grafico,200);
     }
 }

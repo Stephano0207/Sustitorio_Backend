@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('empleados',EmpleadoController::class);
 Route::resource('departamentos',DepartamentoController::class);
 Route::post("iniciarSesion",[UsuarioController::class,'login'])->name('usuario.loging');
+Route::get("departamentos/grafico/total",[DepartamentoController::class,'graficar'])->name('departamento.graficar');

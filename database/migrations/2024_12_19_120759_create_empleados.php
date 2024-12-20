@@ -12,13 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->id('Codempleado');
+            $table->string('Codempleado',4)->primary();
             $table->string('Nomempleado',30);
             $table->string('Apeempleado',50);
-            $table->unsignedBigInteger('CodDepartamento');
+            $table->string('CodDepartamento');
             $table->string('Dirempleado',50);
 
-            $table->foreign('CodDepartamento')->references('CodDepartamento')->on('departamentos');
+            $table
+            ->foreign('CodDepartamento')
+            ->references('CodDepartamento')
+            ->on('departamentos')
+            ->onUpdate('CASCADE')
+            ;
 
             // $table->timestamps();
         });

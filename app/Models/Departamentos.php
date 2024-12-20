@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Departamentos extends Model
 {
+    protected $keyType = 'string'; // Define el tipo de la llave primaria como string
     protected $table='departamentos';
     protected $primaryKey='CodDepartamento';
     protected $fillable=

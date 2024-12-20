@@ -14,14 +14,17 @@ class DepartamentoSeeder extends Seeder
     public function run(): void
     {
         Departamentos::create([
+            "CodDepartamento"=>"C1",
             "Desdepartamento"=>"Por ahi",
           ]);
 
           Departamentos::create([
+            "CodDepartamento"=>"C2",
             "Desdepartamento"=>"Por alla",
           ]);
 
           Departamentos::create([
+            "CodDepartamento"=>"C3",
             "Desdepartamento"=>"Mas alla",
           ]);
     }
